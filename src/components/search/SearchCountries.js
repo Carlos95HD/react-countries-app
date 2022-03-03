@@ -1,28 +1,39 @@
 import React, { useContext, useEffect, useState } from "react";
-import { fetchAllCountries, fetchByName } from "../../helpers/fetchCountries";
+import { fetchByName } from "../../helpers/fetchCountries";
 import { CountriesContext } from "../../context/CountriesContext";
 import { CountryCard } from "../countries/CountryCard";
 import { Field, Form, Formik } from "formik";
 import { countryFilter } from "../../selectors/getCountryByContinent";
+import ReactPaginate from "react-paginate";
+import { db } from "../../data/db";
 
 export const SearchCountries = () => {
-  const [continent, setContinent] = useState("");
   const { countries, setCountries } = useContext(CountriesContext);
+  const [continent, setContinent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
 
+  
   useEffect(() => {
-    const fetchCountries = async () => {
-      const resp = await fetchAllCountries();
-      setCountries(resp);
-    };
-    setLoading(true);
-    fetchCountries();
-    setLoading(false);
-  }, []);
+    // const fetchCountries = async () => {
+      //   const resp = await fetchAllCountries();
+      //   setCountries(resp);
+      // };
+      // setLoading(true);
+    // fetchCountries();
+    // setLoading(false);
+    setCountries(db)
+  }, [setCountries]);
+  
+  const countriesPerPage = 8;
+  const pagesVisited = pageNumber * countriesPerPage;
 
-  const filteredCountry = () => {
-    return countries.slice(0, 8);
-  };
+  //40 -> 50
+  const displayCountries = countries.slice(pagesVisited, pagesVisited + countriesPerPage);
+  const pageCount = Math.ceil(countries.length / countriesPerPage);
+  const changePage = ({selected}) => {
+    setPageNumber(selected);
+  }
 
   const handleChange = ({ target }) => {
     setContinent(target.value);
@@ -40,8 +51,16 @@ export const SearchCountries = () => {
       <Formik
         initialValues={{ search: "", continent: "" }}
         onSubmit={handleSubmit}
+        validate={( values ) => {
+          let errors = {};
+          if (!values.search) {
+            errors.search = "Enter a name";
+          }
+
+          return errors;
+        }}
       >
-        {() => (
+        {({ errors }) => (
           <Form className="flex p-4 w-full">
             <div className="flex-1 w-50">
               <div className="align-middle">
@@ -55,6 +74,9 @@ export const SearchCountries = () => {
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
+                <span className="text-red-500">
+                  {errors.search}
+                </span>
               </div>
             </div>
             <div className="flex-1 w-50 text-right p-2">
@@ -78,15 +100,31 @@ export const SearchCountries = () => {
         )}
       </Formik>
 
-      <div className="grid grid-cols-4 grid-rows-2 gap-8 p-4">
         {loading ? (
           <p>Loading...</p>
         ) : (
-          filteredCountry().map((country) => (
-            <CountryCard key={country.area} {...country} />
-          ))
+          <>
+          <div className="grid grid-cols-4 grid-rows-2 gap-8 p-4 h-5/6 min-h-full">
+            {
+              displayCountries.map((country) => (
+                <CountryCard key={country.cca2} {...country} />
+                ))
+            }
+            </div>
+            <div>
+              <ReactPaginate
+                previousLabel={'Previous'}
+                nextLabel={'Next'}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
+          </div>
+          </>
         )}
-      </div>
+
     </>
   );
 };
