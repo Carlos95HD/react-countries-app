@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const CountryCard = ({
+  cca2,
   name,
   population,
   region,
@@ -8,8 +10,8 @@ export const CountryCard = ({
   flags
 }) => {
   return (
-      <div className="shadow-md cursor-pointer">
-        <img src={flags.svg} alt="Argentina" className="w-full"/>
+      <Link to={`/country/${cca2}`} className="shadow-md cursor-pointer">
+        <img src={flags.svg} alt="name" className="w-full"/>
         <div className="p-6">
           <h2 className="font-bold">{ name.official }</h2>
           <ul>
@@ -18,6 +20,6 @@ export const CountryCard = ({
             <li>Capital: { !!capital && capital[0] }</li>
           </ul>
         </div>
-      </div>
+      </Link>
   )
 }
