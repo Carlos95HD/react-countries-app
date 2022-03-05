@@ -504,6 +504,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: absolute;
 }
 
+.col-auto {
+  grid-column: auto;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
 .m-4 {
   margin: 1rem;
 }
@@ -541,16 +549,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 83.333333%;
 }
 
-.h-4\/6 {
-  height: 66.666667%;
-}
-
 .min-h-full {
   min-height: 100%;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-3\/5 {
@@ -565,6 +573,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   cursor: pointer;
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -577,8 +589,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 2rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .rounded-sm {
   border-radius: 0.125rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-none {
@@ -624,6 +644,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   vertical-align: middle;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -659,6 +684,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-lg {
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .filter {
   -webkit-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
           filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
@@ -681,7 +712,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .btn-blue:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
 .card {
@@ -702,26 +733,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .pagination > .active > a{
-  background-color: #47ccde ;
-  border-color: #47ccde ;
+  background-color: grey ;
+  border-color: grey ;
   color: #fff;
 }
 
 .pagination > li > a{
-  border: 1px solid #47ccde ;
+  border: 1px solid grey ;
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: #47ccde ;
-  border-color: #47ccde;
+  background-color: grey ;
+  border-color: grey;
   outline: none ;
 }
 
 .pagination > li > a, .pagination > li > span{
-  color: #47ccde
+  color: grey
 }
 
 .pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
