@@ -11,5 +11,13 @@ export const fetchByName = async( name ) => {
   const resp = await restCountries.get(`/name/${ name }`);
   const result = resp.data;
 
-  return result ;
+  return result;
+};
+
+
+export const fetchByCode = async( code ) => {
+  const resp = await restCountries.get(`/alpha/${ code }`);
+  const result = resp.data;
+
+  return result;
 };
