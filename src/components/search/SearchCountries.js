@@ -100,7 +100,7 @@ export const SearchCountries = () => {
           <p>Loading...</p>
         ) : (
           <>
-          <div className="grid grid-cols-4 grid-rows-2 gap-8 p-4 h-5/6 min-h-full">
+          <div className="grid grid-cols-4 grid-rows-2 gap-20 p-4 h-5/6 h-auto">
             {
               search.length > 0 ? displayCountries.map((country) => (
                 <CountryCard key={country.cca2} {...country} />
@@ -108,7 +108,7 @@ export const SearchCountries = () => {
                 : 'no hay resultados'
             }
             </div>
-            <div>
+            <div className="flex">
               <ReactPaginate
                 previousLabel={'Previous'}
                 nextLabel={'Next'}

@@ -7,7 +7,6 @@ import { getBorderCountries } from "../../selectors/getBorderCountries";
 export const CountryScreen = () => {
   const { code } = useParams();
   const navigate = useNavigate();
-
   const { countries } = useContext(CountriesContext);
   const [country, setcountry] = useState(null);
 
@@ -20,19 +19,12 @@ export const CountryScreen = () => {
       setcountry(resp);
     }
 
-    // setcountry(getCountryByCode(countrycca2, countries));
     fetchCountry();
     return () => {
       cancel = true;
     }
   }, [code]);
 
-// country = useMemo(() => getCountryByCode(countrycca2, countries), [countrycca2, countries]);
-  
-  // if (!country) {
-  //   return <Navigate to="/" />;
-  // }
-  
   const handleReturn = () => {
     navigate(-1);
   };
