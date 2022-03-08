@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { CountriesContext } from "../../context/CountriesContext";
 import { fetchByCode } from "../../helpers/fetchCountries";

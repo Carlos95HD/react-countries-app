@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 .dark {
-  --color-bg-primary: hsl(207, 26%, 17%);
-  --color-bg-secondary: hsl(209, 23%, 22%);
-  --color-text-primary: #f7fafc;
+  --color-bg-primary: hsl(207, 26%, 17%); /* Dark Mode Background */
+  --color-bg-secondary: hsl(209, 23%, 22%); /* Dark Mode Elements */
+  --color-text-primary: hsl(0, 0%, 100%); /* Dark Mode Text & Light Mode Elements */
   --color-text-secondary: #e2e8f0;
   --color-text-accent: #81e6d9;
 }
 
 .light {
-  --color-bg-primary: hsl(0, 0%, 98%);
-  --color-bg-secondary: #edf2f7;
-  --color-text-primary: #2d3748;
+  --color-bg-primary: hsl(0, 0%, 98%); /* Light Mode Background */
+  --color-bg-secondary: hsl(0, 0%, 100%);
+  /* --color-bg-secondary: hsl(0, 0%, 52%); Light Mode Input */
+  --color-text-primary: hsl(200, 15%, 8%); /* Light Mode Text */
   --color-text-secondary: #4a5568;
   --color-text-accent: #2b6cb0;
 }

@@ -43,7 +43,7 @@ export const SearchCountries = () => {
   }
 
   return (
-    <>
+    <div className="h-full">
       <Formik
         initialValues={{ search: "", continent: "" }}
         onSubmit={handleSearch}
@@ -60,24 +60,25 @@ export const SearchCountries = () => {
           <Form className="flex p-4 w-full">
             <div className="flex-1 w-50">
               <div className="align-middle">
-                <button type="submit" className="absolute m-4 text-neutral-500">
+                <button type="submit" className="absolute m-4 text-neutral-500 transition-all duration-300 text-primary">
                   <ion-icon name="search-sharp"></ion-icon>
                 </button>
                 <Field
                   name="search"
                   type="text"
-                  className="shadow-md mt-1 pl-11 py-4 bg-white shadow-md border-slate-300 placeholder-slate-400 w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-sm sm:text-sm focus:ring-1"
+                  className="shadow-md mt-1 pl-11 py-5 border-slate-300 placeholder-slate-400 w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 transition-all duration-300 bg-secondary"
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
-                <span className="text-red-500">
+                <span className="absolute text-red-500">
                   {errors.search}
                 </span>
               </div>
             </div>
-            <div className="flex-1 w-50 text-right p-2">
+            <div className="flex-1 w-50 text-right">
               <Field
                 as="select"
+                className='p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary'
                 name="continent"
                 value={continent}
                 onChange={handleChange}
@@ -122,6 +123,6 @@ export const SearchCountries = () => {
           </>
         )}
 
-    </>
+    </div>
   );
 };

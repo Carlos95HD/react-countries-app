@@ -10,7 +10,7 @@ export const CountryCard = ({
   flags
 }) => {
   return (
-      <Link to={`/country/${cca2}`} className="shadow-md cursor-pointer">
+      <Link to={`/country/${cca2}`} className="shadow-md cursor-pointer transition-all duration-300 bg-secondary text-primary">
         <img src={flags.svg} alt="name" className="w-full"/>
         <div className="p-6">
           <h2 className="font-bold">{ name.official }</h2>
