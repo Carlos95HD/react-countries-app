@@ -115,9 +115,9 @@ export const SearchCountries = () => {
                 nextLabel={'Next'}
                 pageCount={pageCount}
                 onPageChange={changePage}
-                containerClassName={"pagination"}
-                subContainerClassName={"pages pagination"}
-                activeClassName={"active"}
+                containerClassName={"pagination shadow-md"}
+                subContainerClassName={"pages pagination shadow-md"}
+                activeClassName={"active shadow-md"}
               />
           </div>
           </>
