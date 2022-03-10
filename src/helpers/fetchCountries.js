@@ -1,23 +1,36 @@
 import { restCountries } from "../api/restCountriesApi";
 
 export const fetchAllCountries = async () => {
-  const resp = await restCountries.get('/all');
-  const countriesList = resp.data;
+  try {
+    const resp = await restCountries.get('/all');
+    const countriesList = resp.data;
+    return countriesList ;
 
-  return countriesList ;
+  } catch (error) {
+    return [];
+  }
 };
 
 export const fetchByName = async( name ) => {
-  const resp = await restCountries.get(`/name/${ name }`);
-  const result = resp.data;
+  try {
+    const resp = await restCountries.get(`/name/${ name }`);
+    const result = resp.data;
+    return result;
 
-  return result;
+  } catch (error) {
+    return [];
+  }
 };
 
 
 export const fetchByCode = async( code ) => {
-  const resp = await restCountries.get(`/alpha/${ code }`);
-  const result = resp.data;
+  try {
+    const resp = await restCountries.get(`/alpha/${ code }`);
+    const result = resp.data;
+    return result;
 
-  return result;
+  } catch (error) {
+    return [];
+  }
+
 };

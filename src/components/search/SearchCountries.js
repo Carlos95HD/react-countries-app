@@ -9,15 +9,14 @@ import { Spinner } from "../ui/Spinner";
 
 export const SearchCountries = () => {
   const { countries } = useContext(CountriesContext);
-  const [ search, setSearch ] = useState([]);
+  const [search, setSearch] = useState([]);
   const [continent, setContinent] = useState("");
-  const [ loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
 
   useEffect(() => {
     setSearch(countries);
-  }, [countries])
-
+  }, [countries]);
 
   const handleChange = ({ target }) => {
     setContinent(target.value);
@@ -25,30 +24,37 @@ export const SearchCountries = () => {
 
   const handleSearch = async ({ search }) => {
     setLoading(true);
-    const resp = await fetchByName( search );
-    const filter = countryFilter( resp, continent );
+    const resp = await fetchByName(search);
+    const filter = countryFilter(resp, continent);
 
-    setSearch( filter );
+    setSearch(filter);
     setLoading(false);
     setPageNumber(0);
+  };
+
+  const handleLoadCountries = () => {
+    setSearch(countries);
   };
 
   const countriesPerPage = 8;
   const pagesVisited = pageNumber * countriesPerPage;
 
   //40 -> 50
-  const displayCountries = search.slice(pagesVisited, pagesVisited + countriesPerPage);
+  const displayCountries = search.slice(
+    pagesVisited,
+    pagesVisited + countriesPerPage
+  );
   const pageCount = Math.ceil(search.length / countriesPerPage);
-  const changePage = ({selected}) => {
+  const changePage = ({ selected }) => {
     setPageNumber(selected);
-  }
+  };
 
   return (
     <div className="h-full">
       <Formik
         initialValues={{ search: "", continent: "" }}
         onSubmit={handleSearch}
-        validate={( values ) => {
+        validate={(values) => {
           let errors = {};
           if (!values.search) {
             errors.search = "Enter a name";
@@ -61,7 +67,10 @@ export const SearchCountries = () => {
           <Form className="flex p-4 w-full">
             <div className="flex-1 w-50">
               <div className="align-middle">
-                <button type="submit" className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 text-primary">
+                <button
+                  type="submit"
+                  className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 text-primary"
+                >
                   <i className="flex">
                     <ion-icon name="search-sharp"></ion-icon>
                   </i>
@@ -73,7 +82,7 @@ export const SearchCountries = () => {
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
-                <span className="absolute text-red-500 font-semibold mt-2">
+                <span className="absolute text-red-500 font-semibold mt-2 ml-1">
                   {errors.search}
                 </span>
               </div>
@@ -81,14 +90,12 @@ export const SearchCountries = () => {
             <div className="flex-1 w-50 text-right">
               <Field
                 as="select"
-                className='font-light p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary'
+                className="font-light p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
                 name="continent"
                 value={continent}
                 onChange={handleChange}
               >
-                <option hidden>
-                  Filter by Region
-                </option>
+                <option hidden>Filter by Region</option>
                 <option value="Africa">Africa</option>
                 <option value="Americas">America</option>
                 <option value="Asia">Asia</option>
@@ -100,34 +107,50 @@ export const SearchCountries = () => {
         )}
       </Formik>
 
-        {loading ? (
-          <div className="flex h-96 justify-center items-center">
-            <Spinner />
-          </div>
-        ) : (
-          <>
+      {loading ? (
+        <div className="flex h-96 justify-center items-center">
+          <Spinner />
+        </div>
+      ) : (
+        <>
           <div className="grid grid-cols-4 grid-rows-2 gap-20 gap-x-24 mt-4 p-4 h-5/6 h-auto">
-            {
-              search.length > 0 ? displayCountries.map((country) => (
+            {search.length > 0 ? (
+              displayCountries.map((country) => (
                 <CountryCard key={country.cca2} {...country} />
-                ))
-                : 'no hay resultados'
-            }
-            </div>
+              ))
+            ) : (
+              <div className="absolute p-2 font-normal rounded bg-red-500 text-xl shadow-lg">
+                <div className="py-2 px-4 text-white">
+                  {" "}
+                  No results found
+                  <p className="text-sm font-base text-white">
+                    To show all available countries click&nbsp;
+                    <span
+                      className="cursor-pointer"
+                      onClick={handleLoadCountries}
+                    >
+                      here.
+                    </span>
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+          {search.length > 0 && (
             <div className="flex">
               <ReactPaginate
-                previousLabel={'Previous'}
-                nextLabel={'Next'}
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
                 pageCount={pageCount}
                 onPageChange={changePage}
                 containerClassName={"pagination shadow-md"}
                 subContainerClassName={"pages pagination shadow-md"}
                 activeClassName={"active shadow-md"}
               />
-          </div>
-          </>
-        )}
-
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };
