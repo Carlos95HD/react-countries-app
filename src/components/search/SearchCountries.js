@@ -5,6 +5,7 @@ import { CountryCard } from "../countries/CountryCard";
 import { Field, Form, Formik } from "formik";
 import { countryFilter } from "../../selectors/getCountryByContinent";
 import ReactPaginate from "react-paginate";
+import { Spinner } from "../ui/Spinner";
 
 export const SearchCountries = () => {
   const { countries } = useContext(CountriesContext);
@@ -60,8 +61,10 @@ export const SearchCountries = () => {
           <Form className="flex p-4 w-full">
             <div className="flex-1 w-50">
               <div className="align-middle">
-                <button type="submit" className="absolute m-4 text-neutral-500 transition-all duration-300 text-primary">
-                  <ion-icon name="search-sharp"></ion-icon>
+                <button type="submit" className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 text-primary">
+                  <i className="flex">
+                    <ion-icon name="search-sharp"></ion-icon>
+                  </i>
                 </button>
                 <Field
                   name="search"
@@ -70,7 +73,7 @@ export const SearchCountries = () => {
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
-                <span className="absolute text-red-500">
+                <span className="absolute text-red-500 font-semibold mt-2">
                   {errors.search}
                 </span>
               </div>
@@ -78,12 +81,12 @@ export const SearchCountries = () => {
             <div className="flex-1 w-50 text-right">
               <Field
                 as="select"
-                className='p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary'
+                className='font-light p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary'
                 name="continent"
                 value={continent}
                 onChange={handleChange}
               >
-                <option hidden className="border-none">
+                <option hidden>
                   Filter by Region
                 </option>
                 <option value="Africa">Africa</option>
@@ -98,10 +101,12 @@ export const SearchCountries = () => {
       </Formik>
 
         {loading ? (
-          <p>Loading...</p>
+          <div className="flex h-96 justify-center items-center">
+            <Spinner />
+          </div>
         ) : (
           <>
-          <div className="grid grid-cols-4 grid-rows-2 gap-20 p-4 h-5/6 h-auto">
+          <div className="grid grid-cols-4 grid-rows-2 gap-20 gap-x-24 mt-4 p-4 h-5/6 h-auto">
             {
               search.length > 0 ? displayCountries.map((country) => (
                 <CountryCard key={country.cca2} {...country} />

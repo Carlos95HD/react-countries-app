@@ -56,9 +56,14 @@ export const CountryScreen = () => {
       <div className='flex mt-4'>
         <button 
           onClick={handleReturn}
-          className="btn col-span-2 p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
+          className="p-2 px-4 col-span-2 flex items-center shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
           >
-            Back
+            <i className="flex mx-2">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </i>
+            <span className="mx-2">
+              Back
+            </span>
         </button>
       </div>
 
@@ -68,45 +73,45 @@ export const CountryScreen = () => {
           <Spinner />
         </div>
         :
-        <div className="flex mt-4">
+        <div className="flex mt-16">
           <div className="w-1/2 flex items-center">
               <img src={flags?.svg} alt="name" className="w-10/12"/>
           </div>
 
           <div className="grid w-1/2 content-center gap-y-12">
-            <h1 className="text-2xl font-bold">{name && name.official}</h1>
+            <h1 className="text-2xl font-bold">{name ? name.official : 'n/a'}</h1>
 
-            <div className="grid grid-cols-2">
+            <div className="grid grid-cols-2 text-base">
               <ul className="">
                 <li>
                   <span className='font-semibold mr-1'>
                     Native name: 
                   </span>
-                    { nativeName && nativeName[0].official}
+                    { nativeName ? nativeName[0].official : 'N/A'}
                 </li>
                 <li>
                   <span className='font-semibold mr-1'>
                     Population: 
                   </span>
-                    {population}
+                    {population ? population : 'N/A'}
                 </li>
                 <li>
                   <span className='font-semibold mr-1'>
                     Region: 
                   </span>
-                    {region}
+                    {region ? region : 'N/A'}
                 </li>
                 <li>
                   <span className='font-semibold mr-1'>
                     Sub Region: 
                   </span>
-                    {subregion}
+                    {subregion ? subregion : 'N/A'}
                 </li>
                 <li>
                   <span className='font-semibold mr-1'>
                     Capital: 
                   </span>
-                    {capital}
+                    {capital ? capital : 'N/A'}
                 </li>
               </ul>
               <ul className="">
@@ -114,25 +119,25 @@ export const CountryScreen = () => {
                   <span className='font-semibold mr-1'>
                   Top Level Domain:
                   </span>
-                   {tld?.[0]}
+                   {tld?.[0] ? tld?.[0] : 'N/A'}
                 </li>
                 <li>
                   <span className='font-semibold mr-1'>
                   Currencies:
                   </span>
-                   { currenciesArray && currenciesArray[0].name }
+                   { currenciesArray ? currenciesArray[0].name : 'N/A' }
                 </li>
                 <li>
                   <span className='font-semibold'>
-                  Languages:
+                  Languages:&nbsp;
                   </span>
-                   { languagesArray && languagesArray.join(", ") }
+                   { languagesArray ? languagesArray.join(", ") : 'N/A'}
                 </li>
               </ul>
             </div>
 
             <div className='inline-flex h-min'>
-              <p className='font-semibold'>Border Countries: </p>
+              <p className='font-semibold my-auto'>Border Countries: </p>
               <ul className="flex flex-wrap ml-2">
                 {
                 !!borders ? getBorders.map( border  => (
@@ -143,7 +148,7 @@ export const CountryScreen = () => {
                       {border.name.official}
                     </Link>
                   ))
-                  : ''
+                  : 'N/A'
                 }
               </ul>
             </div>
