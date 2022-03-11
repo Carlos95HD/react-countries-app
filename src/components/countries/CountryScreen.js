@@ -56,7 +56,7 @@ export const CountryScreen = () => {
       <div className='flex mt-4'>
         <button 
           onClick={handleReturn}
-          className="p-2 px-4 col-span-2 flex items-center shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
+          className="p-2 px-4 col-span-2 flex items-center shadow-lg rounded-lg transition-all duration-300 bg-secondary text-primary"
           >
             <i className="flex mx-2">
               <ion-icon name="arrow-back-outline"></ion-icon>
@@ -73,15 +73,15 @@ export const CountryScreen = () => {
           <Spinner />
         </div>
         :
-        <div className="flex mt-16">
-          <div className="w-1/2 flex items-center">
-              <img src={flags?.svg} alt="name" className="w-10/12"/>
+        <div className="sm:grid lg:flex mt-16">
+          <div className="lg:w-1/2 flex items-center">
+              <img src={flags?.svg} alt="name" className="lg:w-10/12"/>
           </div>
 
-          <div className="grid w-1/2 content-center gap-y-12">
-            <h1 className="text-2xl font-bold">{name ? name.official : 'n/a'}</h1>
+          <div className="grid lg:w-1/2 content-center gap-y-8 lg:gap-y-12">
+            <h1 className="mt-8 lg:mt-0 text-2xl font-bold">{name ? name.official : 'n/a'}</h1>
 
-            <div className="grid grid-cols-2 text-base">
+            <div className="grid lg:grid-cols-2 text-base">
               <ul className="">
                 <li>
                   <span className='font-semibold mr-1'>
@@ -114,7 +114,8 @@ export const CountryScreen = () => {
                     {capital ? capital : 'N/A'}
                 </li>
               </ul>
-              <ul className="">
+
+              <ul className="mt-8 lg:mt-0">
                 <li>
                   <span className='font-semibold mr-1'>
                   Top Level Domain:
@@ -136,14 +137,14 @@ export const CountryScreen = () => {
               </ul>
             </div>
 
-            <div className='inline-flex h-min'>
-              <p className='font-semibold my-auto'>Border Countries: </p>
-              <ul className="flex flex-wrap ml-2">
+            <div className='lg:inline-flex h-min'>
+              <p className='font-semibold'>Border Countries:</p>
+              <ul className="flex flex-wrap gap-2 mt-4 mr-2 lg:ml-2 lg:mt-0">
                 {
                 !!borders ? getBorders.map( border  => (
                     <Link to={`/country/${border.cca2}`}
                       key={border.cca2}
-                      className="btn text-sm mb-1 mx-1 h-min col-span-auto p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
+                      className="btn text-sm mb-1 mx-0 lg:mx-1 h-min col-span-auto p-5 shadow-lg rounded-lg transition-all duration-300 bg-secondary text-primary"
                     >
                       {border.name.official}
                     </Link>

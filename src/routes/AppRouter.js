@@ -11,7 +11,7 @@ export const AppRouter = () => {
         <BrowserRouter className="bg-primary">
             <NavBar />
 
-            <div className='h-auto mt-2 min-h-auto mx-auto p-4 px-12 transition-all duration-300 bg-primary text-primary'>
+            <div className='h-auto mt-2 min-h-auto mx-auto p-4 sm:px-12 transition-all duration-300 bg-primary text-primary'>
               <Routes>
                 <Route path="/" element={<CountriesHome />} />
                 <Route path="/country/:code" element={<CountryScreen />} />
