@@ -75,10 +75,10 @@ export const CountryScreen = () => {
         :
         <div className="sm:grid lg:flex mt-16">
           <div className="lg:w-1/2 flex items-center">
-              <img src={flags?.svg} alt="name" className="lg:w-10/12"/>
+              <img src={flags?.svg} alt="name" className="lg:w-10/12 animate__animated animate__fadeIn"/>
           </div>
 
-          <div className="grid lg:w-1/2 content-center gap-y-8 lg:gap-y-12">
+          <div className="grid lg:w-1/2 content-center gap-y-8 lg:gap-y-12 animate__animated animate__fadeIn">
             <h1 className="mt-8 lg:mt-0 text-2xl font-bold">{name ? name.official : 'n/a'}</h1>
 
             <div className="grid lg:grid-cols-2 text-base">
