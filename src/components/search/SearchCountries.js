@@ -73,7 +73,7 @@ export const SearchCountries = () => {
               <div className="align-middle">
                 <button
                   type="submit"
-                  className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 text-primary"
+                  className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 input-gray"
                 >
                   <i className="flex">
                     <ion-icon name="search-sharp"></ion-icon>
@@ -82,7 +82,7 @@ export const SearchCountries = () => {
                 <Field
                   name="search"
                   type="text"
-                  className="shadow-md mt-1 pl-11 py-5 border-slate-300 placeholder-slate-400 sm:w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 transition-all duration-300 bg-secondary"
+                  className="input-gray shadow-md mt-1 pl-11 py-5 border-slate-300 placeholder-slate-400 sm:w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded sm:text-sm focus:ring-1 transition-all duration-300 bg-secondary"
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
@@ -94,7 +94,7 @@ export const SearchCountries = () => {
             <div className="flex-1 mt-8 w-50 lg:mt-0 lg:text-right">
               <Field
                 as="select"
-                className="font-light p-5 shadow-md rounded-md transition-all duration-300 bg-secondary text-primary"
+                className="font-light p-5 shadow-md rounded transition-all duration-300 bg-secondary text-primary"
                 name="continent"
                 value={continent}
                 onChange={handleChange}

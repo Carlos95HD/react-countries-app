@@ -7,6 +7,7 @@
 .dark {
   --color-bg-primary: hsl(207, 26%, 17%); /* Dark Mode Background */
   --color-bg-secondary: hsl(209, 23%, 22%); /* Dark Mode Elements */
+  --color-bg-accent: #0c4a6e;
   --color-text-primary: hsl(0, 0%, 100%); /* Dark Mode Text & Light Mode Elements */
   --color-text-secondary: #e2e8f0;
   --color-text-accent: #81e6d9;
@@ -15,7 +16,7 @@
 .light {
   --color-bg-primary: hsl(0, 0%, 98%); /* Light Mode Background */
   --color-bg-secondary: hsl(0, 0%, 100%);
-  /* --color-bg-secondary: hsl(0, 0%, 52%); Light Mode Input */
+  --color-bg-accent: hsl(0, 0%, 96%);
   --color-text-primary: hsl(200, 15%, 8%); /* Light Mode Text */
   --color-text-secondary: #4a5568;
   --color-text-accent: #2b6cb0;
@@ -28,6 +29,9 @@ html, body {
   font-family: 'Nunito Sans', sans-serif;
 }
 
+.input-gray{
+  color: hsl(0, 0%, 100%);
+}
 
 .bg-primary{
   background-color: var(--color-bg-primary);
@@ -42,19 +46,13 @@ html, body {
 }
 
 .btn {
-    @apply py-2 px-4 rounded;
+  background-color: var(--color-bg-secondary);
+  padding: 0.5rem;
+  transition: all 300ms ease;
 }
 
-.btn-blue {
-    @apply bg-blue-500 text-white;
-}
-
-.btn-blue:hover {
-    @apply bg-blue-600;
-}
-
-.card {
-    @apply rounded overflow-hidden shadow-lg;
+.btn:hover{
+  background-color: var(--color-bg-accent);
 }
 
 /* Pagination */

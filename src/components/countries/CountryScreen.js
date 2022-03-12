@@ -56,7 +56,7 @@ export const CountryScreen = () => {
       <div className='flex mt-4'>
         <button 
           onClick={handleReturn}
-          className="p-2 px-4 col-span-2 flex items-center shadow-lg rounded-lg transition-all duration-300 bg-secondary text-primary"
+          className="btn p-2 px-4 col-span-2 flex items-center shadow-lg rounded dark:hover:bg-sky-900"
           >
             <i className="flex mx-2">
               <ion-icon name="arrow-back-outline"></ion-icon>
@@ -144,7 +144,7 @@ export const CountryScreen = () => {
                 !!borders ? getBorders.map( border  => (
                     <Link to={`/country/${border.cca2}`}
                       key={border.cca2}
-                      className="btn text-sm mb-1 mx-0 lg:mx-1 h-min col-span-auto p-5 shadow-lg rounded-lg transition-all duration-300 bg-secondary text-primary"
+                      className="btn text-sm mb-1 mx-0 lg:mx-1 h-min col-span-auto p-2 shadow-lg rounded transition-all duration-300 bg-secondary text-primary dark:hover:bg-sky-900 outline-white"
                     >
                       {border.name.official}
                     </Link>
