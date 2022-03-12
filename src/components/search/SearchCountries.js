@@ -1,54 +1,39 @@
-import React, { useContext, useEffect, useState } from "react";
-import { fetchByName } from "../../helpers/fetchCountries";
-import { CountriesContext } from "../../context/CountriesContext";
-import { CountryCard } from "../countries/CountryCard";
-import { Field, Form, Formik } from "formik";
-import { countryFilter } from "../../selectors/getCountryByContinent";
+import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { Field, Form, Formik } from "formik";
 import { Spinner } from "../ui/Spinner";
+import { CountryCard } from "../countries/CountryCard";
+import { useSearchCountries } from "../../hooks/useSearchCountries";
 
 export const SearchCountries = () => {
-  const { countries } = useContext(CountriesContext);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [search, setSearch] = useState([]);
+  const [search, searchCountry, loadAllCountries] = useSearchCountries();
   const [continent, setContinent] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
-
-  useEffect(() => {
-    setSearch(countries);
-    setLoading(false);
-  }, [countries]);
+  const { result, loading, error } = search;
 
   const handleChange = ({ target }) => {
     setContinent(target.value);
   };
 
   const handleSearch = async ({ search }) => {
-    setLoading(true);
-    const resp = await fetchByName(search);
-    const filter = countryFilter(resp, continent);
-
-    resp.length === 0 && setError(true);
-    setSearch(filter);
-    setLoading(false);
+    await searchCountry(search, continent);
     setPageNumber(0);
   };
 
   const handleLoadCountries = () => {
-    setSearch(countries);
-    setError(false);
+    loadAllCountries();
+    setPageNumber(0);
   };
 
   const countriesPerPage = 8;
   const pagesVisited = pageNumber * countriesPerPage;
 
   //40 -> 50
-  const displayCountries = search.slice(
+  const displayCountries = result.slice(
     pagesVisited,
     pagesVisited + countriesPerPage
   );
-  const pageCount = Math.ceil(search.length / countriesPerPage);
+  const pageCount = Math.ceil(result.length / countriesPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
@@ -73,7 +58,7 @@ export const SearchCountries = () => {
               <div className="align-middle">
                 <button
                   type="submit"
-                  className="absolute cursor-default m-4 mt-5 text-neutral-500 transition-all duration-300 input-gray"
+                  className="absolute cursor-default m-4 mt-5 duration-300 input-primary"
                 >
                   <i className="flex">
                     <ion-icon name="search-sharp"></ion-icon>
@@ -82,7 +67,7 @@ export const SearchCountries = () => {
                 <Field
                   name="search"
                   type="text"
-                  className="input-gray shadow-md mt-1 pl-11 py-5 border-slate-300 placeholder-slate-400 sm:w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded sm:text-sm focus:ring-1 transition-all duration-300 bg-secondary"
+                  className="shadow-md mt-1 placeholder:text-gray-500 pl-11 py-5 border-slate-300 sm:w-3/5 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded sm:text-sm focus:ring-1 duration-300 bg-secondary input-primary dark:placeholder:text-gray-100"
                   placeholder="Search for a country..."
                   autoComplete="off"
                 />
@@ -94,7 +79,7 @@ export const SearchCountries = () => {
             <div className="flex-1 mt-8 w-50 lg:mt-0 lg:text-right">
               <Field
                 as="select"
-                className="font-light p-5 shadow-md rounded transition-all duration-300 bg-secondary text-primary"
+                className="font-light p-5 shadow-md rounded duration-300 bg-secondary text-primary"
                 name="continent"
                 value={continent}
                 onChange={handleChange}
@@ -118,7 +103,7 @@ export const SearchCountries = () => {
       ) : (
         <>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-rows-2 gap-16 lg:gap-16 xl:gap-20 gap-x-24 mt-4 p-4 h-5/6 h-auto">
-            {search.length > 0 &&
+            {result.length > 0 &&
               displayCountries.map((country) => (
                 <CountryCard key={country.cca2} {...country} />
               ))}
@@ -141,7 +126,7 @@ export const SearchCountries = () => {
               ""
             )}
           </div>
-          {search.length > 0 && (
+          {result.length > 0 && (
             <div className="flex">
               <ReactPaginate
                 marginPagesDisplayed={1}
