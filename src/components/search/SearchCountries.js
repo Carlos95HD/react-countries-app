@@ -96,7 +96,7 @@ export const SearchCountries = () => {
         )}
       </Formik>
 
-      {loading ? (
+      { loading ? (
         <div className="flex h-96 justify-center items-center">
           <Spinner />
         </div>

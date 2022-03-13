@@ -26,8 +26,7 @@ export const fetchByName = async( name ) => {
 export const fetchByCode = async( code ) => {
   try {
     const resp = await restCountries.get(`/alpha/${ code }`);
-    const result = resp.data;
-    return result;
+    return resp.data;
 
   } catch (error) {
     return [];

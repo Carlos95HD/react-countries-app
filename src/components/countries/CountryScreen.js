@@ -8,9 +8,9 @@ import { Spinner } from "../ui/Spinner";
 export const CountryScreen = () => {
   const { countries } = useContext(CountriesContext);
   const [loading, setLoading] = useState(false);
+  const [country, setcountry] = useState(null);
   const { code } = useParams();
   const navigate = useNavigate();
-  const [country, setcountry] = useState(null);
 
   useEffect(() => {
     let cancel = false;
@@ -18,8 +18,8 @@ export const CountryScreen = () => {
     const fetchCountry = async () => {
       setLoading(true);
       const resp = await fetchByCode(code);
+      resp.length === 0 ? navigate("/") : setcountry(resp);
       if (cancel) return;
-      setcountry(resp);
       setLoading(false);
     };
 
@@ -27,7 +27,7 @@ export const CountryScreen = () => {
     return () => {
       cancel = true;
     };
-  }, [code]);
+  }, [code, navigate]);
 
   const handleReturn = () => {
     navigate(-1);
@@ -44,7 +44,7 @@ export const CountryScreen = () => {
     currencies,
     languages,
     borders,
-  } = !!country && country[0];
+  } = !!country && country.length !== 0 && country[0];
 
   const nativeName = name?.nativeName && Object.values(name.nativeName);
   const currenciesArray = !!currencies && Object.values(currencies);

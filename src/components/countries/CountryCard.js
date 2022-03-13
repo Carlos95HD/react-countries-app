@@ -10,7 +10,7 @@ export const CountryCard = ({
   flags
 }) => {
   return (
-      <Link to={`/country/${cca2}`} className="animate__animated animate__fadeIn shadow-md cursor-pointer rounded transition-all duration-300 bg-secondary text-primary">
+      <Link to={`/country/${cca2}`} className="card-float animate__animated animate__fadeIn shadow-md cursor-pointer rounded transition-all duration-300 bg-secondary text-primary">
         <img src={flags.svg} alt={name} className="w-full rounded-t"/>
         <div className="p-6">
           <h2 className="font-bold text-lg">{ name.official }</h2>

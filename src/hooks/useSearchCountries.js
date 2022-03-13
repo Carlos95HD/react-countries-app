@@ -15,7 +15,7 @@ export const useSearchCountries = () => {
     setSearch({
       result: countries,
       error: null,
-      loading: false,
+      loading: countries?.[1] ? false : true,
     });
   }, [countries]);
 
